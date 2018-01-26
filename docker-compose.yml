@@ -1,0 +1,87 @@
+version: '3.0'
+services:
+  rabbitmq:
+    build:
+      context: ./rabbitmq
+    image: 'rabbitmq:0.1'
+    ports:
+      - '5672:5672'
+      - '30001:15672'
+    hostname: 'rabbitmq'
+    container_name: 'rabbitmq'
+  zipkinlogger:
+    build:
+      context: ./zipkinlogger
+    image: 'zipkinlogger:0.1'
+    environment:
+      RABBIT_ADDRESSES: rabbitmq
+    ports:
+      - '9411:9411'
+    hostname: 'zipkinlogger'
+    container_name: 'zipkinlogger'
+  prometheus:
+    build:
+      context: ./prometheus
+    image: 'prom:0.1'
+    ports:
+      - '9090:9090'
+    hostname: 'prometheus'
+    container_name: 'prometheus'
+  grafana:
+    build:
+      context: ./grafana
+    image: 'grafana/grafana:latest'
+    ports:
+      - '3000:3000'
+    hostname: 'grafana'
+    container_name: 'grafana'
+  configservice:
+    build:
+      context: ./configservice
+    image: 'configservice:0.1'
+    ports:
+      - '8888:8888'
+    hostname: 'configservice'
+    container_name: 'configservice'
+  serviceregistry:
+    build:
+      context: ./serviceregistry
+    image: 'serviceregistry:0.1'
+    ports:
+      - '8761:8761'
+    hostname: 'serviceregistry'
+    container_name: 'serviceregistry'
+  gateway:
+    build:
+      context: ./gateway
+    image: 'gateway:0.1'
+    ports:
+      - '8765:8765'
+    hostname: 'gateway'
+    container_name: 'gateway'
+  helloservice:
+    build:
+      context: ./helloservice
+    image: 'helloservice:0.1'
+    depends_on:
+      - configservice
+      - serviceregistry
+    ports:
+      - '8090:8080'
+    hostname: 'helloservice'
+    container_name: 'helloservice'
+  bonjourservice:
+    build:
+      context: ./bonjourservice
+    image: 'bonjourservice:0.1'
+    depends_on:
+      - configservice
+      - serviceregistry
+    ports:
+      - '8092:8080'
+    hostname: 'bonjourservice'
+    container_name: 'bonjourservice'
+networks:
+  default:
+    external:
+      name: microtest

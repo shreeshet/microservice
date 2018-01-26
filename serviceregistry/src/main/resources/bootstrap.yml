@@ -1,0 +1,16 @@
+server:
+  port: 8761
+spring:
+  application:
+    name: serviceregistry
+management:
+  security:
+    enabled: false
+eureka:
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    server:
+      waitTimeInMsWhenSyncEmpty: 0
+test:
+  prop:100
