@@ -13,8 +13,8 @@
       		<module>serviceregistry</module>
 		<module>configservice</module>
 		<module>gateway</module>
- 		<module>helloservice</module>
-		<module>bonjourservice</module>
+ 		<module>movieservice</module>
+		<module>inventoryservice</module>
 	</modules>
 
 

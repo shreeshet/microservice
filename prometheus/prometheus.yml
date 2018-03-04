@@ -18,7 +18,7 @@ scrape_configs:
     metrics_path: /prometheus
 
     static_configs:
-      - targets: ['gateway:8765','brokerage:8080','clientmanagement:8080','digitaladvise:8080']
+      - targets: ['gateway:8765','movieservice:8080']
 
   - job_name: 'docker-stats'
 

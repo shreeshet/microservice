@@ -59,28 +59,28 @@ services:
       - '8765:8765'
     hostname: 'gateway'
     container_name: 'gateway'
-  helloservice:
+  movieservice:
     build:
-      context: ./helloservice
-    image: 'helloservice:0.1'
-    depends_on:
-      - configservice
-      - serviceregistry
-    ports:
-      - '8090:8080'
-    hostname: 'helloservice'
-    container_name: 'helloservice'
-  bonjourservice:
-    build:
-      context: ./bonjourservice
-    image: 'bonjourservice:0.1'
+      context: ./movieservice
+    image: 'movieservice:0.1'
     depends_on:
       - configservice
       - serviceregistry
     ports:
       - '8092:8080'
-    hostname: 'bonjourservice'
-    container_name: 'bonjourservice'
+    hostname: 'movieservice'
+    container_name: 'movieservice'
+  inventoryservice:
+    build:
+      context: ./inventoryservice
+    image: 'inventoryservice:0.1'
+    depends_on:
+      - configservice
+      - serviceregistry
+    ports:
+      - '8093:8080'
+    hostname: 'inventoryservice'
+    container_name: 'inventoryservice'
 networks:
   default:
     external:
