@@ -1,0 +1,16 @@
+<PageHeader>
+      SakilaFlix <small>your one stop movie shop</small>
+      <SearchBox/>
+    </PageHeader>
+    <MovieSearch/>
+    <MovieInventory/>
+
+{
+			  		movieInventory.map((rec,idx) =>
+			  			<tr key={rec.inventoryId} data-inventoryid={rec.inventoryId}>
+					      <td>{rec.storeId}</td>
+					      <td>{rec.rentalDuration} (days)</td>
+					      <td>{rec.lastUpdate}</td>
+			  			</tr>
+			  		)
+			  	}
